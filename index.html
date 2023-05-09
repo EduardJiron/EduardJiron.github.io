@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="./scripts/script.js"></script>
+    <title>Earth Animation</title>
+</head>
+
+<body>
+
+    <a-assets>
+        <img id="sky" src="./assets/img/starfield01.png" alt="star Texture">
+        <img id="planetTexture" src="./assets/img/8k_earth_daymap.png" alt="Planet Texture">
+        <img id="atmosferaTexture" src="./assets/img//8k_earth_clouds.png" alt="Planet Texture">
+        <img id="sunTexture" src="./assets/img//Sol.jpg" alt="sun Texture">
+        <img id="moonTexture" src="../assets/img//luna.png" alt="moon Texture">
+        <img id="mercurioTexture" src="./assets/img//mercurio.jpg" alt="mercurio Texture">
+        <img id="venusTexture" src="./assets/img//venus.jpg" alt="venus Texture">
+        <audio id="musica" src="./assets/sound/musica.mp3" autoplay="true" loop="true" volume="0.5"></audio>
+
+    </a-assets>
+
+    <a-scene>
+
+        <a-entity sound="src: #musica; autoplay: true; loop: true; volume: 10"></a-entity>
+        <a-sky src="#sky" rotation="0 0 0" id="skybox" radius="6000"></a-sky>
+
+        <a-entity id="sol" position="0 0 0">
+            <a-sphere src="#sunTexture" radius="100" light="type: point; color: white; intensity: 3; distance: 10000"
+                shader="flat"></a-sphere>
+        </a-entity>
+
+        <a-entity id="mercurio" position="400 0" orbit="target: #sol; radius: 500; speed: 1">
+            <a-sphere src="#mercurioTexture" radius="25"></a-sphere>
+            <a-plane id="mercurioBtn" position="-1 1 -3" width="1" height="0.5" color="#E0E0E0"
+                text="value: Mercurio; color: black; align: center;" onclick="zoomToPlanet('mercurio')"></a-plane>
+        </a-entity>
+
+        <a-entity id="venus" position="900 0 0" orbit="target: #sol; radius: 1000; speed: 0.8"
+            rotationjs="velocidad:0.3">
+            <a-sphere src="#venusTexture" radius="50"></a-sphere>
+        </a-entity>
+
+        <a-entity id="tierra" position="1200 0 0" orbit="target: #sol; radius: 2000; speed: 0.2"
+            rotationjs="velocidad:0.3">
+            <a-sphere src="#planetTexture" radius="150" rotation="0 0 0" rotationjs="velocidad:0.2"></a-sphere>
+            <a-sphere src="#atmosferaTexture" radius="155" rotation="0 0 0" opacity="0.5" transparent="true"
+                rotationjs="velocidad:0.2"></a-sphere>
+                <a-entity id="luna" position="200 0 0" orbit="target: #tierra; radius: 200; speed: 2"
+                rotationjs="velocidad:0.3">
+                <a-sphere src="#moonTexture" radius="25" rotation="0 0 0"></a-sphere>
+            </a-entity>
+            <a-entity camera look-controls wasd-controls-enabled> </a-entity>
+            <a-entity>
+                <a-camera id="camera" position="400 0 0" wasd-controls></a-camera>
+            </a-entity>
+
+        </a-entity>
+        <a-entity id="marte" position="1600 0 0" orbit="target: #sol; radius: 3000; speed: 0.4"
+            rotationjs="velocidad:0.3">
+            <a-sphere color="red" radius="80"></a-sphere>
+        </a-entity>
+
+    </a-scene>
+
+</body>
+
+</html>
